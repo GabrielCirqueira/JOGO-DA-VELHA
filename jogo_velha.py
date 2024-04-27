@@ -1,5 +1,3 @@
-# JOGO DA VELHA
-
 dados = [
         ['1', '2', '3'],
         ['4', '5', '6'],
@@ -24,17 +22,23 @@ def tabela(dados,jogada_X):
     local = int(input("DIGITE AONDE DESEJA JOGAR: "))
     return local
     
-
 def Alterar_jogada():
     global jogada_X 
-    jogada_X = not jogada_X
-    
+    jogada_X = not jogada_X    
     
 while True:
     jogada = tabela(dados,jogada_X)
     
+    if jogada < 1 or jogada > 9:
+        print("Número inválido. Escolha um número entre 1 e 9.")
+        continue
+    
     linha = (jogada - 1) // 3
     coluna = (jogada - 1) % 3
+ 
+    if dados[linha][coluna] == "X" or dados[linha][coluna] == "O":
+        print("Posição já ocupada. Escolha outra.")
+        continue
 
     if jogada_X:
         dados[linha][coluna] = "X"
@@ -62,10 +66,16 @@ while True:
         ganhou = True
     
     if ganhou:
+        print("\n\n\n")
+        print(f" {dados[0][0]} | {dados[0][1]} | {dados[0][2]} ")
+        print("-----------")
+        print(f" {dados[1][0]} | {dados[1][1]} | {dados[1][2]} ")
+        print("-----------")
+        print(f" {dados[2][0]} | {dados[2][1]} | {dados[2][2]} ")
         if not jogada_X:
-            print("\n\nX GANHOU !!!\n\n\n")
+            print("\n\nX GANHOU !!!\n")
         else:
-            print("\n\nO GANHOU !!!\n\n\n")
+            print("\n\nO GANHOU !!!\n")
         break
 
     
